@@ -1,0 +1,26 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  margin-top: 50px;
+}
+
+a {
+  color: #E94F37;
+}
+
+.word {
+  height: 500px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 20px;
+}
+
+h5 {
+  text-transform: uppercase;
+}
+
+span.letter {
+  padding-right: 10px;
+  padding-bottom: 40px;
+  margin-right: 10px;
+  font-size: 2em;
+  border-bottom: 1px solid #000;
+}
