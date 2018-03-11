@@ -8,6 +8,7 @@ const data = require("../lib/data")
 const db = require("../lib/db")
 const Translate = require("@google-cloud/translate")
 const WordNet = require("node-wordnet")
+const natural = require("natural")
 
 const projectId = "citizen-capital"
 
@@ -52,9 +53,6 @@ const fetchTranslations = async (text, lang) => {
     .translate(text, lang)
     .then(results => {
       const translation = results[0]
-
-      console.log(`Text: ${text}`)
-      console.log(`Translation: ${translation}`)
 
       resolve(translation)
     })
