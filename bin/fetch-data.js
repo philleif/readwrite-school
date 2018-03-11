@@ -3,78 +3,77 @@
 require("dotenv").config()
 
 const axios = require("axios")
-const language = require("@google-cloud/language")
+const images = require("../lib/images")
+const data = require("../lib/data")
+const db = require("../lib/db")
+const Translate = require("@google-cloud/translate")
+const WordNet = require("node-wordnet")
 
-const client = new language.LanguageServiceClient()
+const projectId = "citizen-capital"
+
+const translate = new Translate({
+  projectId: projectId
+})
 
 const NYT_API_KEY = process.env.NYT_API_KEY
 
 const run = async () => {
-  console.log("Fetching NYT Articles...")
+  // clear wordlist
+  await db.Word.remove({}, function() {})
 
-  let date = new Date()
-  let month = date.getMonth()
+  // fetch words from NYT
+  let text = await data.fetchArticles()
 
-  await axios
-    .get(
-      "http://api.nytimes.com/svc/archive/v1/2018/" +
-        month +
-        ".json?api-key=" +
-        NYT_API_KEY
-    )
-    .then(async response => {
-      // console.log(response.data.response.docs[0].snippet)
+  text = await data.catalogText(text)
 
-      let text = ""
-
-      for (let doc of response.data.response.docs.slice(1, 100)) {
-        text += " " + doc.snippet
+  for (let node of text) {
+    let word = new db.Word({
+      word: node.word,
+      image: await images.search(node.word),
+      synonyms: await wordNetAsync(node.word),
+      translations: {
+        french: await fetchTranslations(node.word, "fr"),
+        arabic: await fetchTranslations(node.word, "ar"),
+        spanish: await fetchTranslations(node.word, "es"),
+        chinese: await fetchTranslations(node.word, "zh-CN"),
+        urdu: await fetchTranslations(node.word, "ur")
       }
-
-      // TODO: remove words < 4 letters
-      // TODO: strip punctuation
-      let store = text.split(" "),
-        distribution = {},
-        max = 0,
-        result = []
-
-      store.forEach(function(a) {
-        distribution[a] = (distribution[a] || 0) + 1
-        if (distribution[a] > max) {
-          max = distribution[a]
-          result = [a]
-          return
-        }
-        if (distribution[a] === max) {
-          result.push(a)
-        }
-      })
-
-      console.log(distribution)
-
-      let document = {
-        content: text,
-        type: "PLAIN_TEXT"
-      }
-
-      await client
-        .analyzeEntities({ document: document })
-        .then(results => {
-          const entities = results[0].entities
-
-          console.log("Entities:")
-          entities.forEach(entity => {
-            console.log(entity.name)
-            console.log(` - Type: ${entity.type}, Salience: ${entity.salience}`)
-            if (entity.metadata && entity.metadata.wikipedia_url) {
-              console.log(` - Wikipedia URL: ${entity.metadata.wikipedia_url}$`)
-            }
-          })
-        })
-        .catch(err => {
-          console.error("ERROR:", err)
-        })
     })
+
+    console.log("Saving word...")
+
+    word.save()
+  }
+}
+
+const fetchTranslations = async (text, lang) => {
+  return new Promise((resolve, reject) => {
+    translate
+    .translate(text, lang)
+    .then(results => {
+      const translation = results[0]
+
+      console.log(`Text: ${text}`)
+      console.log(`Translation: ${translation}`)
+
+      resolve(translation)
+    })
+    .catch(err => {
+      reject(err)
+    })
+  })
+}
+
+const wordNetAsync = async word => {
+  return new Promise((resolve, reject) => {
+    let wordnet = new WordNet()
+
+    wordnet.lookup(word, function(results) {
+      results.forEach(function(result) {
+        resolve(result.synonyms)
+      })
+    })
+  })
 }
 
 run()

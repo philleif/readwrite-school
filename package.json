@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@google-cloud/language": "^1.1.0",
+    "@google-cloud/translate": "^1.1.0",
     "axios": "^0.18.0",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
@@ -15,12 +16,15 @@
     "es6-promise": "^4.2.4",
     "express": "^4.16.2",
     "isomorphic-fetch": "^2.2.1",
+    "mongoose": "^5.0.9",
     "morgan": "~1.9.0",
     "natural": "^0.5.6",
     "node-fetch": "^2.1.1",
+    "node-wordnet": "^0.1.12",
     "pug": "2.0.0-beta11",
     "serve-favicon": "~2.4.5",
     "unsplash-js": "^4.8.0",
-    "whatwg-fetch": "^2.0.3"
+    "whatwg-fetch": "^2.0.3",
+    "wndb-with-exceptions": "^3.0.2"
   }
 }
