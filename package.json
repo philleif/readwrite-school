@@ -24,6 +24,7 @@
     "node-wordnet": "^0.1.12",
     "pug": "2.0.0-beta11",
     "serve-favicon": "~2.4.5",
+    "the-noun-project": "^2.0.1",
     "unsplash-js": "^4.8.0",
     "whatwg-fetch": "^2.0.3",
     "wndb-with-exceptions": "^3.0.2"

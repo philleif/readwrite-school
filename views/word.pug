@@ -1,0 +1,51 @@
+extends layout
+
+block content
+  header
+    .word
+      h1= word.word
+      span= word.translations.spanish
+      span &middot;
+      span= word.translations.french
+      span &middot;
+      span= word.translations.arabic
+      span &middot;
+      span= word.translations.chinese
+      span &middot;
+      span= word.translations.urdu
+    .image
+      img(src=word.image)
+
+  .spelling
+    table.spell
+      tr
+        td(v-align="top")
+          h6 Letters
+        td.right
+          - let chars = word.word.split()
+            .letters
+              - for (var i = 0; i < word.word.length; i++) {
+                  span= word.word.charAt(i)
+              - }
+    table.words
+      tr
+        td(v-align="top")
+          h6 Words
+        td.right
+          - if (word.synonyms.length > 3)
+            - word.synonyms = word.synonyms.slice(0,3)
+          - for (w of word.synonyms)
+            span= w
+
+    table.sentence
+      tr
+        td(valign="top")
+          h6 Sentence
+        td.right
+          p= word.exp[0]
+
+          hr
+          hr
+
+  footer
+    p= page

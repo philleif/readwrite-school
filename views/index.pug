@@ -2,15 +2,14 @@ extends layout
 
 block content
   .container
-    - for (let node of text) {
+    - for (let word of words) {
       .word
-        h2= node.word
-        img(src=node.image)
+        h2= word.word
+        img(src=word.image)
         h5 Letters
-        - let chars = node.word.split()
-        - var s = node.word
+        - let chars = word.word.split()
         .letters
-          - for (var i = 0; i < s.length; i++) {
-              span.letter= s.charAt(i)
+          - for (var i = 0; i < word.word.length; i++) {
+              span.letter= word.word.charAt(i)
           - }
     - }

@@ -1,10 +1,22 @@
 body {
   font-family: 'Open Sans', sans-serif;
   margin-top: 50px;
+  color: #000;
+  margin-left: 20px;
 }
 
 a {
   color: #E94F37;
+}
+
+li {
+  list-style-type: none;
+  float: left;
+  padding-right: 20px;
+}
+
+li span {
+  padding-left: 20px;
 }
 
 .word {
@@ -13,14 +25,26 @@ a {
   margin-bottom: 20px;
 }
 
-h5 {
+h6 {
   text-transform: uppercase;
 }
 
-span.letter {
+.section {
+  height: 200px;
+}
+
+span.letter, .word span, .sentence span {
   padding-right: 10px;
   padding-bottom: 40px;
   margin-right: 10px;
   font-size: 2em;
   border-bottom: 1px solid #000;
+}
+
+.word span {
+  padding-right: 200px;
+}
+
+.sentence span {
+  padding-right: 300px;
 }

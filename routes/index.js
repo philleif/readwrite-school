@@ -1,26 +1,26 @@
 "use strict"
 
-const data = require("../lib/data")
-const images = require("../lib/images")
+const db = require("../lib/db")
 const express = require("express")
 
 const router = express.Router()
 
-
 /* GET home page. */
 router.get("/", async (req, res, next) => {
-  let text = await data.fetchArticles()
+  let words = await db.Word.find({})
 
-  text = await data.catalogText(text)
+  res.render("index", { words: words })
+})
 
-  for (let node of text) {
-    node.image = await images.search(node.word)
-    console.log(node.image)
-  }
+/* Vocab page. */
+router.get("/word/:word/:page", async (req, res, next) => {
+  let word = await db.Word.findOne({
+    word: req.params.word
+  })
 
-  console.log(text)
+  console.log(word)
 
-  res.render("index", { text: text })
+  res.render("word", { word: word, page: req.params.page })
 })
 
 module.exports = router

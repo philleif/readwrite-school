@@ -28,47 +28,57 @@ const run = async () => {
   text = await data.catalogText(text)
 
   for (let node of text) {
-    let word = new db.Word({
-      word: node.word,
-      image: await images.search(node.word),
-      synonyms: await wordNetAsync(node.word),
-      translations: {
-        french: await fetchTranslations(node.word, "fr"),
-        arabic: await fetchTranslations(node.word, "ar"),
-        spanish: await fetchTranslations(node.word, "es"),
-        chinese: await fetchTranslations(node.word, "zh-CN"),
-        urdu: await fetchTranslations(node.word, "ur")
-      }
-    })
+    console.log("saving", node.word)
 
-    console.log("Saving word...")
+    let wordnet = await wordNetAsync(node.word)
 
-    word.save()
+    console.log(wordnet)
+
+    if (wordnet) {
+      let word = new db.Word({
+        word: node.word,
+        image: await images.search(node.word),
+        synonyms: wordnet.syn,
+        exp: wordnet.exp,
+        translations: {
+          french: await fetchTranslations(node.word, "fr"),
+          arabic: await fetchTranslations(node.word, "ar"),
+          spanish: await fetchTranslations(node.word, "es"),
+          chinese: await fetchTranslations(node.word, "zh-CN"),
+          urdu: await fetchTranslations(node.word, "ur")
+        }
+      })
+
+      word.save()
+    }
   }
 }
 
 const fetchTranslations = async (text, lang) => {
   return new Promise((resolve, reject) => {
     translate
-    .translate(text, lang)
-    .then(results => {
-      const translation = results[0]
+      .translate(text, lang)
+      .then(results => {
+        const translation = results[0]
 
-      resolve(translation)
-    })
-    .catch(err => {
-      reject(err)
-    })
+        resolve(translation)
+      })
+      .catch(err => {
+        reject(err)
+      })
   })
 }
 
 const wordNetAsync = async word => {
   return new Promise((resolve, reject) => {
     let wordnet = new WordNet()
-
     wordnet.lookup(word, function(results) {
+      if (results.length < 1) resolve(false)
       results.forEach(function(result) {
-        resolve(result.synonyms)
+        resolve({
+          syn: result.synonyms,
+          exp: result.exp
+        })
       })
     })
   })
