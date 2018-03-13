@@ -19,38 +19,53 @@ const translate = new Translate({
 const NYT_API_KEY = process.env.NYT_API_KEY
 
 const run = async () => {
-  // clear wordlist
-  await db.Word.remove({}, function() {})
+  try {
+    // clear wordlist
+    await db.Word.remove({}, function() {})
 
-  // fetch words from NYT
-  let text = await data.fetchArticles()
+    // fetch words from NYT
+    let text = await data.fetchArticles()
+    let dictionary = text.dictionary
 
-  text = await data.catalogText(text)
+    text = await data.catalogText(text.text)
 
-  for (let node of text) {
-    console.log("saving", node.word)
+    for (let node of text) {
+      //console.log("saving", node.word)
 
-    let wordnet = await wordNetAsync(node.word)
+      let wordnet = await wordNetAsync(node.word)
 
-    console.log(wordnet)
+      if (wordnet) {
+        let found = dictionary.find(element => {
+          return element.word === node.word
+        })
 
-    if (wordnet) {
-      let word = new db.Word({
-        word: node.word,
-        image: await images.search(node.word),
-        synonyms: wordnet.syn,
-        exp: wordnet.exp,
-        translations: {
-          french: await fetchTranslations(node.word, "fr"),
-          arabic: await fetchTranslations(node.word, "ar"),
-          spanish: await fetchTranslations(node.word, "es"),
-          chinese: await fetchTranslations(node.word, "zh-CN"),
-          urdu: await fetchTranslations(node.word, "ur")
+        console.log(found)
+
+        let word = new db.Word({
+          word: node.word,
+          //image: await images.search(node.word),
+          synonyms: wordnet.syn,
+          exp: wordnet.exp,
+          translations: {
+            // french: await fetchTranslations(node.word, "fr"),
+            // arabic: await fetchTranslations(node.word, "ar"),
+            // spanish: await fetchTranslations(node.word, "es"),
+            // chinese: await fetchTranslations(node.word, "zh-CN"),
+            // urdu: await fetchTranslations(node.word, "ur")
+          }
+        })
+
+        if(typeof found != "undefined") {
+          word.section = found.section
+          word.subsection = found.subsection
         }
-      })
 
-      word.save()
+
+        word.save()
+      }
     }
+  } catch (error) {
+    throw error
   }
 }
 
