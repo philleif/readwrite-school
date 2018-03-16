@@ -23,7 +23,7 @@ Generate wordlist from NYT: `node bin/fetch-data.js`
 
 Import images: `node bin/image-import.js`
 
-Import translations:  `node bin/translations-import.js`
+Import translations:  `node bin/translations-import.js` (you'll need to enable the Google Translations API in the Cloud Console)
 
 ## Sample Sentences
 
