@@ -1,50 +1,101 @@
 body {
-  font-family: 'Open Sans', sans-serif;
-  margin-top: 50px;
+  font-family: 'Open Sans';
+  padding: 50px;
+  margin: 0px;
   color: #000;
-  margin-left: 20px;
+  border-top: 8px solid #000;
 }
 
-a {
-  color: #E94F37;
+#pagefooter {
+  position: absolute;
+  bottom: 30px;
+  left: 40px;
+  font-size: 10px;
 }
 
-li {
-  list-style-type: none;
-  float: left;
-  padding-right: 20px;
+.page {
+  margin-right: 80px;
 }
 
-li span {
-  padding-left: 20px;
+header {
+  clear: both;
 }
 
 .word {
-  height: 500px;
-  border-bottom: 1px solid #eee;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
-h6 {
-  text-transform: uppercase;
+.spelling {
+  width: 90%;
 }
 
-.section {
-  height: 200px;
+.words, .sentence, .spell {
+  margin-top: 60px;
 }
 
-span.letter, .word span, .sentence span {
-  padding-right: 10px;
-  padding-bottom: 40px;
-  margin-right: 10px;
-  font-size: 2em;
-  border-bottom: 1px solid #000;
+td.right {
+  padding-left: 40px;
+}
+
+.word {
+  width: 60%;
+  float: left;
 }
 
 .word span {
-  padding-right: 200px;
+  margin-right: 10px;
+  font-size: 12px;
 }
 
-.sentence span {
-  padding-right: 300px;
+.image {
+  width: 40%;
+  float: right;
+}
+
+.image img {
+  max-height: 200px;
+  max-width: 200px;
+  float: right;
+  margin-right: 20px;
+}
+
+h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  margin-top: 0px;
+}
+
+h6 {
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: lighter;
+}
+
+.letters span {
+  font-size: 22px;
+  padding-right: 20px;
+  margin-right: 10px;
+  padding-bottom: 40px;
+  border-bottom: 1px dotted #000;
+}
+
+.words span {
+  font-size: 20px;
+  padding-right: 40px;
+  margin-right: 18px;
+  padding-bottom: 40px;
+  border-bottom: 1px dotted #000;
+}
+
+.sentence p {
+  font-size: 18px;
+  margin-bottom: 60px;
+}
+
+hr {
+  height: 0px;
+  color: #fff;
+  border: none;
+  border-bottom: 1px dotted #000;
+  margin-bottom: 40px;
 }
