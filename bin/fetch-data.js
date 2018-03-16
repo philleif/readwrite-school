@@ -10,10 +10,8 @@ const Translate = require("@google-cloud/translate")
 const WordNet = require("node-wordnet")
 const natural = require("natural")
 
-const projectId = "citizen-capital"
-
 const translate = new Translate({
-  projectId: projectId
+  projectId: process.env.PROJECT_ID
 })
 
 const NYT_API_KEY = process.env.NYT_API_KEY

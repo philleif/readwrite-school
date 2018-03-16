@@ -12,12 +12,17 @@ const run = async () => {
     let words = await db.Word.find({})
 
     for (let word of words) {
-      if (typeof word.image === "undefined") {
-        word.image = await images.search(word.word)
-        await word.save()
-        console.log(word)
+      try {
+        let response = await images.search(word.word)
 
-        await sleep(1000)
+        word.image = response.url
+        word.imageCredit = response.credit
+
+        await word.save()
+
+        console.log(word)
+      } catch (error) {
+        console.log(error)
       }
     }
   } catch (error) {
