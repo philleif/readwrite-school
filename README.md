@@ -4,20 +4,16 @@ Programmatic reading and writing practice books.
 
 ## Installation
 
-`git clone`
-`npm install`
+1. `git clone`
+2. `npm install`
 
 Requires a .env file with the following variables:
 
-`NYT_API_KEY - API key from the New York Times (wordlist)
-
-UNSPLASH_APP_ID - Unsplash.com App ID (photos)
-
-UNSPLASH_SECRET - Unsplash.com API secret (photos)
-
-PROJECT_ID - Google Cloud project ID (translations)
-
-DB_URL - Mongo connection string`
+- NYT_API_KEY - API key from the New York Times (wordlist)
+- UNSPLASH_APP_ID - Unsplash.com App ID (photos)
+- UNSPLASH_SECRET - Unsplash.com API secret (photos)
+- PROJECT_ID - Google Cloud project ID (translations)
+- DB_URL - Mongo connection string`
 
 ## Database Seeding
 
