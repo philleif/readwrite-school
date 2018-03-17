@@ -7,9 +7,7 @@ const router = express.Router()
 
 /* GET home page. */
 router.get("/", async (req, res, next) => {
-  let words = await db.Word.find({})
-
-  res.render("index", { words: words })
+  res.render("homepage")
 })
 
 /* Vocab page. */
