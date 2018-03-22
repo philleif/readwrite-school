@@ -1,7 +1,7 @@
 body {
   font-family: "Open Sans";
   color: #333333;
-  border-top: 4px solid #EF4621; }
+  border-top: 16px solid #EF4621; }
 
 a {
   color: #EF4621; }
@@ -44,6 +44,9 @@ hr {
   margin-right: 2em;
   margin-left: 2em; }
 
+h1, h2, h3 {
+  font-family: 'Roboto Slab', serif; }
+
 h1, h5 {
   padding-top: 1em;
   font-weight: bold; }
@@ -57,7 +60,11 @@ h6 {
   margin-top: 2em; }
 
 footer {
-  margin-top: 2em;
-  background: #eeeeee; }
+  padding-top: 2em;
+  padding-bottom: 2em;
+  background: #eeeeee;
+  text-align: center; }
+  footer span {
+    margin: 1em; }
 
 /*# sourceMappingURL=web.css.map */

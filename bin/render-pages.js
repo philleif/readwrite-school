@@ -17,7 +17,7 @@ const run = async () => {
       }
     }
 
-    for (let w in words) {
+    for (let w in words) { // TODO: render by section
       let path = await downloadAsync(words[w].word, w)
       let html = fs.readFileSync(path, "utf8")
 

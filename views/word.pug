@@ -1,21 +1,23 @@
 extends layout
 
 block content
-  header
-    .word
-      h1= word.word
-      span= word.translations.spanish
-      span &middot;
-      span= word.translations.french
-      span &middot;
-      span= word.translations.arabic
-      span &middot;
-      span= word.translations.chinese
-      span &middot;
-      span= word.translations.urdu
-    .image
-      img(src=word.image)
-  .spelling
+  #page
+    header
+      center
+        .image
+          img(src=word.image)
+        .word
+          h1= word.word
+          span= word.translations.spanish
+          span &middot;
+          span= word.translations.french
+          span &middot;
+          span= word.translations.arabic
+          span &middot;
+          span= word.translations.chinese
+          span &middot;
+          span= word.translations.urdu
+    hr.heading
     table.spell
       tr
         td(v-align="top")
@@ -34,7 +36,7 @@ block content
           - if (word.synonyms.length > 3)
             - word.synonyms = word.synonyms.slice(0,3)
           - for (w of word.synonyms)
-            span= w.replace("_", " ")
+            span= w.replace("_", " ").replace("(a)", "")
 
     table.sentence
       tr
@@ -45,7 +47,7 @@ block content
 
           hr
           hr
-  #pagefooter
-    span.page= page
-    span
-      em Photo by #{word.imageCredit} on Unsplash
+    #pagefooter
+      span.page= parseInt(page) + 1
+      span
+        em Photo by #{word.imageCredit} on Unsplash

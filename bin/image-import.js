@@ -13,7 +13,13 @@ const run = async () => {
 
     for (let word of words) {
       try {
-        let response = await images.search(word.word)
+        let terms = word.word
+
+        if (word.imageWord != "") {
+          terms = word.imageWord // overwrite default search term
+        }
+
+        let response = await images.search(terms)
 
         word.image = response.url
         word.imageCredit = response.credit

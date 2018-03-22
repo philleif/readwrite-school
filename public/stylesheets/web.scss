@@ -2,7 +2,7 @@
 body {
   font-family: "Open Sans";
   color: #333333;
-  border-top: 4px solid #EF4621;
+  border-top: 16px solid #EF4621;
 }
 
 a {
@@ -65,6 +65,10 @@ hr {
 
 }
 
+h1, h2, h3 {
+  font-family: 'Roboto Slab', serif;
+}
+
 h1, h5 {
   padding-top: 1em;
   font-weight: bold;
@@ -81,6 +85,11 @@ h6 {
 }
 
 footer {
-  margin-top: 2em;
+  padding-top: 2em;
+  padding-bottom: 2em;
   background: #eeeeee;
+  text-align: center;
+  span {
+    margin: 1em;
+  }
 }
