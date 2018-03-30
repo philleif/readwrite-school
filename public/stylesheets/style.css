@@ -73,33 +73,33 @@ h6 {
   font-size: 14px;
   padding-right: 20px;
   margin-right: 10px;
-  padding-bottom: 40px;
-  border-bottom: 1px dotted #000;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #000;
 }
 
 .words span {
   font-size: 14px;
   padding-right: 40px;
   margin-right: 18px;
-  padding-bottom: 40px;
-  border-bottom: 1px dotted #000;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #000;
 }
 
 .sentence p {
   font-size: 14px;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 hr {
   height: 0px;
   color: #fff;
   border: none;
-  border-bottom: 1px dotted #000;
+  border-bottom: 1px solid #000;
   margin-bottom: 40px;
 }
 
 hr.heading {
   border-bottom: 1px solid #eee;
   margin-bottom: 10px;
-  margin-top: 30px;
+  margin-top: 20px;
 }
