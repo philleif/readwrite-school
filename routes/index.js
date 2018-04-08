@@ -21,4 +21,8 @@ router.get("/word/:word/:page", async (req, res, next) => {
   res.render("word", { word: word, page: req.params.page })
 })
 
+router.get("/license", async (req, res, next) => {
+  res.redirect("https://creativecommons.org/licenses/by/2.0/")
+})
+
 module.exports = router
