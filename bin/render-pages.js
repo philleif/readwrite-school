@@ -7,11 +7,13 @@ const pdf = require("html-pdf")
 
 const run = async () => {
   try {
-    let words = await db.Word.find({ section: { $ne: "Business" } }).sort("word")
+    let words = await db.Word.find({ section: { $ne: "Business" } }).sort(
+      "word"
+    )
     let options = {
       height: "10in", // allowed units: mm, cm, in, px
       width: "8in", // allowed units: mm, cm, in, px      paginationOffset: 1,
-      renderDelay: 500,
+      renderDelay: 500
     }
 
     for (let w in words) {
